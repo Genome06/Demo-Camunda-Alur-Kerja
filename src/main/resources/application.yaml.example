@@ -1,0 +1,54 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tasklist
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  mail:
+    host: sendria.merapi.javan.id
+    port: 1025
+    username: a1c3e2cdb9f31e
+    password: 0cb126225fc47d
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enabled: true
+            required: true
+
+camunda:
+  bpm:
+    admin-user:
+      id: admin
+      password: admin
+      firstName: Admin
+    authorization:
+      enabled: false
+    application:
+      deploy-changed-only: true
+    webapp:
+      enabled: true
+      tasklist:
+        enabled: true
+      index-redirect-enabled: true
+    job-execution:
+      enabled: true
+      deployment-aware: true
+    database:
+      schema-update: true
+    generic-properties:
+      properties:
+        default-user-permission-name-for-task: TASK_WORK
+
+telegram:
+  bot:
+    username: username
+    token: token

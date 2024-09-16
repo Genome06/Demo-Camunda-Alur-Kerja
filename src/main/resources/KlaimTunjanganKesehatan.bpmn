@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0hw8jyk" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.25.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.21.0">
+  <bpmn:collaboration id="Collaboration_0hys7dn">
+    <bpmn:participant id="suatuPerusahaan" name="Suatu Perusahaan" processRef="klaimTunjanganKesehatan" />
+  </bpmn:collaboration>
+  <bpmn:process id="klaimTunjanganKesehatan" name="Klaim Tunjangan Kesehatan" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:laneSet id="LaneSet_0j4dq9d">
+      <bpmn:lane id="Lane_0bcdipk" name="Tim">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>melakukanRevisi</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1tgtjkj" name="HR">
+        <bpmn:flowNodeRef>Gateway_135fhoy</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>reviewPengajuanTunjanganKesehatan</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1mblddb</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_15xtd1j</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" name="Tunjangan Kesehatan Diklaim">
+      <bpmn:outgoing>Flow_1o719c9</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_135fhoy">
+      <bpmn:incoming>Flow_0ff42e1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dantss</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0gj3d3e</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1oesesj</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="melakukanRevisi" name="Melakukan Revisi">
+      <bpmn:incoming>Flow_1oesesj</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ufxxkk</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="reviewPengajuanTunjanganKesehatan" name="Review Pengajuan Tunjangan Kesehatan">
+      <bpmn:incoming>Flow_1o719c9</bpmn:incoming>
+      <bpmn:incoming>Flow_1ufxxkk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ff42e1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_1mblddb">
+      <bpmn:incoming>Flow_0dantss</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0da5pg4" camunda:expression="" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_15xtd1j">
+      <bpmn:incoming>Flow_0gj3d3e</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0ymf963" camunda:expression="" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1o719c9" sourceRef="StartEvent_1" targetRef="reviewPengajuanTunjanganKesehatan" />
+    <bpmn:sequenceFlow id="Flow_0ff42e1" sourceRef="reviewPengajuanTunjanganKesehatan" targetRef="Gateway_135fhoy" />
+    <bpmn:sequenceFlow id="Flow_0dantss" name="setuju" sourceRef="Gateway_135fhoy" targetRef="Event_1mblddb" />
+    <bpmn:sequenceFlow id="Flow_0gj3d3e" name="tolak" sourceRef="Gateway_135fhoy" targetRef="Event_15xtd1j" />
+    <bpmn:sequenceFlow id="Flow_1oesesj" name="revisi" sourceRef="Gateway_135fhoy" targetRef="melakukanRevisi" />
+    <bpmn:sequenceFlow id="Flow_1ufxxkk" sourceRef="melakukanRevisi" targetRef="reviewPengajuanTunjanganKesehatan" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0hys7dn">
+      <bpmndi:BPMNShape id="Participant_0mulsfn_di" bpmnElement="suatuPerusahaan" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="600" height="480" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0bcdipk_di" bpmnElement="Lane_0bcdipk" isHorizontal="true">
+        <dc:Bounds x="190" y="80" width="570" height="190" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1tgtjkj_di" bpmnElement="Lane_1tgtjkj" isHorizontal="true">
+        <dc:Bounds x="190" y="270" width="570" height="290" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="282" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="273" y="120" width="53" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_135fhoy_di" bpmnElement="Gateway_135fhoy" isMarkerVisible="true">
+        <dc:Bounds x="515" y="355" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xtr605_di" bpmnElement="melakukanRevisi">
+        <dc:Bounds x="490" y="140" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1n9e2zt_di" bpmnElement="reviewPengajuanTunjanganKesehatan">
+        <dc:Bounds x="350" y="340" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_01v8ikw_di" bpmnElement="Event_1mblddb">
+        <dc:Bounds x="652" y="362" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ljzu2p_di" bpmnElement="Event_15xtd1j">
+        <dc:Bounds x="522" y="482" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1o719c9_di" bpmnElement="Flow_1o719c9">
+        <di:waypoint x="300" y="198" />
+        <di:waypoint x="300" y="380" />
+        <di:waypoint x="350" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ff42e1_di" bpmnElement="Flow_0ff42e1">
+        <di:waypoint x="450" y="380" />
+        <di:waypoint x="515" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dantss_di" bpmnElement="Flow_0dantss">
+        <di:waypoint x="565" y="380" />
+        <di:waypoint x="652" y="380" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="594" y="362" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gj3d3e_di" bpmnElement="Flow_0gj3d3e">
+        <di:waypoint x="540" y="405" />
+        <di:waypoint x="540" y="482" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="544" y="433" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1oesesj_di" bpmnElement="Flow_1oesesj">
+        <di:waypoint x="540" y="355" />
+        <di:waypoint x="540" y="220" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="544" y="286" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ufxxkk_di" bpmnElement="Flow_1ufxxkk">
+        <di:waypoint x="490" y="180" />
+        <di:waypoint x="400" y="180" />
+        <di:waypoint x="400" y="340" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

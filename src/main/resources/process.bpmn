@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.24.0">
+  <bpmn:collaboration id="Collaboration_16czkik">
+    <bpmn:participant id="Participant_19pb7m3" name="Javan" processRef="notification-process" />
+  </bpmn:collaboration>
+  <bpmn:process id="notification-process" name="Notification Process" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:sequenceFlow id="Flow_0nxulf1" sourceRef="StartEvent_1" targetRef="Gateway_0n93m28" />
+    <bpmn:sequenceFlow id="Flow_1o5xxkv" sourceRef="Gateway_0n93m28" targetRef="Activity_1xfcyr0" />
+    <bpmn:sequenceFlow id="Flow_1wdv7mr" sourceRef="Gateway_0n93m28" targetRef="Activity_0854n1h" />
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0nxulf1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1dsyqj3" sourceRef="Activity_1xfcyr0" targetRef="Gateway_02hj7w1" />
+    <bpmn:endEvent id="Event_07uvdzj">
+      <bpmn:incoming>Flow_1ddxxsy</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1ddxxsy" sourceRef="Gateway_02hj7w1" targetRef="Event_07uvdzj" />
+    <bpmn:userTask id="Activity_1xfcyr0" name="Kirim Notifikasi Telegram">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_1o5xxkv</bpmn:incoming>
+      <bpmn:outgoing>Flow_1dsyqj3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:parallelGateway id="Gateway_0n93m28">
+      <bpmn:incoming>Flow_0nxulf1</bpmn:incoming>
+      <bpmn:outgoing>Flow_1o5xxkv</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1wdv7mr</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:parallelGateway id="Gateway_02hj7w1">
+      <bpmn:incoming>Flow_1dsyqj3</bpmn:incoming>
+      <bpmn:incoming>Flow_0qav1bp</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ddxxsy</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_0qav1bp" sourceRef="Activity_0854n1h" targetRef="Gateway_02hj7w1" />
+    <bpmn:userTask id="Activity_0854n1h" name="Kirim Notifikasi Email">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_1wdv7mr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qav1bp</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_16czkik">
+      <bpmndi:BPMNShape id="Participant_19pb7m3_di" bpmnElement="Participant_19pb7m3" isHorizontal="true">
+        <dc:Bounds x="129" y="120" width="711" height="360" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="282" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_07uvdzj_di" bpmnElement="Event_07uvdzj">
+        <dc:Bounds x="732" y="282" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12qqh4u_di" bpmnElement="Activity_1xfcyr0">
+        <dc:Bounds x="430" y="150" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1lytft1_di" bpmnElement="Gateway_0n93m28">
+        <dc:Bounds x="295" y="275" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0g0cxn6_di" bpmnElement="Gateway_02hj7w1">
+        <dc:Bounds x="605" y="275" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ycpfxb_di" bpmnElement="Activity_0854n1h">
+        <dc:Bounds x="430" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0nxulf1_di" bpmnElement="Flow_0nxulf1">
+        <di:waypoint x="215" y="300" />
+        <di:waypoint x="295" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1o5xxkv_di" bpmnElement="Flow_1o5xxkv">
+        <di:waypoint x="320" y="275" />
+        <di:waypoint x="320" y="190" />
+        <di:waypoint x="430" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wdv7mr_di" bpmnElement="Flow_1wdv7mr">
+        <di:waypoint x="320" y="325" />
+        <di:waypoint x="320" y="390" />
+        <di:waypoint x="430" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dsyqj3_di" bpmnElement="Flow_1dsyqj3">
+        <di:waypoint x="530" y="190" />
+        <di:waypoint x="630" y="190" />
+        <di:waypoint x="630" y="275" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ddxxsy_di" bpmnElement="Flow_1ddxxsy">
+        <di:waypoint x="655" y="300" />
+        <di:waypoint x="732" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qav1bp_di" bpmnElement="Flow_0qav1bp">
+        <di:waypoint x="530" y="390" />
+        <di:waypoint x="630" y="390" />
+        <di:waypoint x="630" y="325" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

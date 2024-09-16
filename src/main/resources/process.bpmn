@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.24.0">
   <bpmn:collaboration id="Collaboration_16czkik">
-    <bpmn:participant id="Participant_19pb7m3" name="Javan" processRef="notification-process" />
+    <bpmn:participant id="Participant_19pb7m3" name="Javan" processRef="notification-process-rizhard" />
   </bpmn:collaboration>
-  <bpmn:process id="notification-process" name="Notification Process" isExecutable="true" camunda:historyTimeToLive="180">
+  <bpmn:process id="notification-process-rizhard" name="Notification Process - rizhard" isExecutable="true" camunda:historyTimeToLive="180">
     <bpmn:sequenceFlow id="Flow_0nxulf1" sourceRef="StartEvent_1" targetRef="Gateway_0n93m28" />
     <bpmn:sequenceFlow id="Flow_1o5xxkv" sourceRef="Gateway_0n93m28" targetRef="Activity_1xfcyr0" />
     <bpmn:sequenceFlow id="Flow_1wdv7mr" sourceRef="Gateway_0n93m28" targetRef="Activity_0854n1h" />

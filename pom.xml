@@ -264,7 +264,7 @@
 		<dependency>
 			<groupId>com.alurkerja.notifier</groupId>
 			<artifactId>alurkerja-notifier</artifactId>
-			<version>3.0.0-20240913.112432-127</version>
+			<version>3.0.0-20240916.070955-131</version>
 		</dependency>
 
 
